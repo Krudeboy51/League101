@@ -29,7 +29,7 @@ public class Links {
     public static String locale = "locale";
     public static String tags = "tags";
     public static String dataById = "dataById";
-    public static String api_key = "api_key"; 
+    public static String api_key = "api_key";
 
 
     public void addParams(String key, String val){
