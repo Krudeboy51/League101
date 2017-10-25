@@ -15,39 +15,41 @@ import java.util.Map;
 
 public class Links {
 
-    protected HashMap<String, String> linkparams;
+    private HashMap<String, String> linkparams;
+    private String mainLink;
+    private int id_ = 0;
+
 
     public static String HTTP_ = "https://";
-    public static String MAINLINK = "https://na1.api.riotgames.com/lol/static-data/v3/champions?";
+    public static String ALLCHAMPIONLINK = "api.riotgames.com/lol/static-data/v3/champions?";
+    public static String CHAMPIONBYIDLINK = "api.riotgames.com/lol/static-data/v3/champions/";
 
+    public static String API_KEY = "RGAPI-c8183911-f646-4206-9010-f1a75c163438";
 
-    public static String API_KEY = "RGAPI-43dca792-7b38-4694-9216-47f2f13460c3";
+    protected String region = "na1."; //e.g. na1, ru
 
-    private String region; //e.g. na1, ru
-
-    //QUERY ITEMS
-    public static String locale = "locale";
-    public static String tags = "tags";
-    public static String dataById = "dataById";
     public static String api_key = "api_key";
+
+    public Links(){
+        linkparams = new HashMap<>();
+        addParams(api_key, API_KEY);
+    }
 
 
     public void addParams(String key, String val){
         linkparams.put(key,val);
     }
 
-    public void setLocale(String locale) {
-        this.addParams(ChampionLink.locale,locale);
+
+    public void setRegion(String r){
+        region = r+".";
     }
 
-    public void setTags(String tags) {
-        this.addParams(ChampionLink.tags,tags);
+    public String getLink(){
+        if (id_ == 0)
+            return HTTP_+region+ALLCHAMPIONLINK+convertLink(linkparams);
+        return HTTP_+region+CHAMPIONBYIDLINK+id_+"?"+convertLink(linkparams);
     }
-
-    public void setDataById(String dataById) {
-        this.addParams(ChampionLink.dataById,dataById);
-    }
-
 
 
     public String convertLink(HashMap<String, String> params) {

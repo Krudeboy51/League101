@@ -41,7 +41,7 @@ import java.util.List;
 public class ChampionHandler {
 
     RequestQueue mReqQue;
-    ChampionLink cLink;
+    Links cLink;
     Gson gson;
     LruCache<String, JSONObject> cache;
 
@@ -56,8 +56,8 @@ public class ChampionHandler {
     }
 
     public void getAllChampions(String tag, final completion c){
-        cLink.addParams(cLink.tags, tag);
-
+        cLink.addParams("tags", tag);
+        Log.i("LINK",cLink.getLink());
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
                 cLink.getLink(),
