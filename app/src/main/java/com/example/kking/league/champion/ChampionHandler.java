@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by kking on 10/20/2017.
@@ -47,17 +48,35 @@ public class ChampionHandler {
 
     private static String CHAMPDATA = "champ_data";
 
+    private HashMap<String, String> linkparams;
+    private String mainLink;
+    private int id_ = 0;
+
+
+    public static String HTTP_ = "https://";
+    public static String ALLCHAMPIONLINK = "api.riotgames.com/lol/static-data/v3/champions?";
+    public static String CHAMPIONBYIDLINK = "api.riotgames.com/lol/static-data/v3/champions/";
+
+    public static String API_KEY = "RGAPI-c8183911-f646-4206-9010-f1a75c163438";
+
+    protected String region = "na1."; //e.g. na1, ru
+
+    public static String api_key = "api_key";
+
     public ChampionHandler(Context c) {
         mReqQue = Volley.newRequestQueue(c);
         cLink = new ChampionLink();
         Log.i("LINK",cLink.getLink());
         gson = new Gson();
         cache = new LruCache<>(4*1024*1024);
+        linkparams = new HashMap<>();
+        addParams(api_key, API_KEY);
     }
 
     public void getAllChampions(String tag, final completion c){
-        cLink.addParams("tags", tag);
-        Log.i("LINK",cLink.getLink());
+        id_ = 0;
+        addParams("tags", tag);
+        Log.i("LINK",getLink());
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
                 cLink.getLink(),
@@ -92,9 +111,12 @@ public class ChampionHandler {
 
                     }
                 }
+
         );
 
-        checkCacheFirst(request);
+        checkCacheFirst(request, getLink());
+        reset();
+
 //        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
 //                Request.Method.GET,
 //                cLink.getLink(),
@@ -225,12 +247,35 @@ public class ChampionHandler {
 //    }
 
     public void getChampion(int id, completion c){
+        id_ = id;
+        addParams("tags", "all");
+        String link = getLink();
+        Log.i("LINK",link);
 
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
+                link,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i("response", response.toString());
+                        Champion champ = gson.fromJson(response.toString(), Champion.class);
+                        Log.i("Champion", champ.getName());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+
+        mReqQue.add(request);
     }
 
-
-
-    public <T> void checkCacheFirst(Request<T> request){
+    public <T> void checkCacheFirst(Request<T> request, String tag){
         synchronized (cache) {
             if(cache.get(CHAMPDATA) == null) {
                 mReqQue.add(request);
@@ -256,5 +301,37 @@ public class ChampionHandler {
 
     public  interface completion {
         <T> void onSuccess(T res, Boolean isSuccess);
+    }
+
+    public void addParams(String key, String val){
+        linkparams.put(key,val);
+    }
+
+
+    public void setRegion(String r){
+        region = r+".";
+    }
+
+    public String getLink(){
+        if (id_ == 0)
+            return HTTP_+region+ALLCHAMPIONLINK+convertLink(linkparams);
+        return HTTP_+region+CHAMPIONBYIDLINK+id_+"?"+convertLink(linkparams);
+    }
+
+
+    public String convertLink(HashMap<String, String> params) {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<String,String> entry : params.entrySet()) {
+            if (sb.length() > 0)
+                sb.append("&");
+            sb.append(entry.getKey()+"="+entry.getValue());
+        }
+        return sb.toString();
+    }
+
+    private void reset(){
+        linkparams = new HashMap<>();
+        linkparams.put(api_key, API_KEY);
+        id_ = 0;
     }
 }

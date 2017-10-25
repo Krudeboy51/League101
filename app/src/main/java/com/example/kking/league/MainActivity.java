@@ -24,12 +24,18 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              championHandler.getAllChampions("tags", new ChampionHandler.completion() {
-                  @Override
-                  public <T> void onSuccess(T res, Boolean isSuccess) {
+//              championHandler.getAllChampions("tags", new ChampionHandler.completion() {
+//                  @Override
+//                  public <T> void onSuccess(T res, Boolean isSuccess) {
+//
+//                  }
+//              });
+                championHandler.getChampion(62, new ChampionHandler.completion() {
+                    @Override
+                    public <T> void onSuccess(T res, Boolean isSuccess) {
 
-                  }
-              });
+                    }
+                });
             }
         });
     }
