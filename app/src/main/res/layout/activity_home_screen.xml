@@ -8,15 +8,7 @@
     android:orientation="vertical"
     tools:context="com.example.kking.league.HomeScreen">
 
-    <android.support.v7.widget.Toolbar
-        android:id = "@+id/toolbar"
-        android:layout_width = "match_parent"
-        android:layout_height = "65dp"
-        android:background = "@color/colorPrimary"
-        android:elevation="5dp"
-        android:title=""
-        android:theme = "@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme = "@style/ThemeOverlay.AppCompat.Light" />
+
 
     <FrameLayout
         android:id="@+id/content"

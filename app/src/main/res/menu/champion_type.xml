@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <item
+        android:id="@+id/all"
+        android:title="@string/all_" />
+
+    <item
+        android:id="@+id/assasin"
+        android:title="@string/assasin" />
+
+    <item
+        android:id="@+id/fighter"
+        android:title="@string/fighter" />
+
+    <item
+        android:id="@+id/mage"
+        android:title="@string/mage" />
+
+    <item
+        android:id="@+id/marksman"
+        android:title="@string/marksman" />
+
+    <item
+        android:id="@+id/support"
+        android:title="@string/support" />
+
+    <item
+        android:id="@+id/tank"
+        android:title="@string/tank" />
+</menu>

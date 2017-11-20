@@ -24,7 +24,7 @@ public class Links {
     public static String ALLCHAMPIONLINK = "api.riotgames.com/lol/static-data/v3/champions?";
     public static String CHAMPIONBYIDLINK = "api.riotgames.com/lol/static-data/v3/champions/";
 
-    public static String API_KEY = "RGAPI-c8183911-f646-4206-9010-f1a75c163438";
+    public static String API_KEY = "RGAPI-470727fa-4ce5-4149-b76f-5674df15a053";
 
     protected String region = "na1."; //e.g. na1, ru
 

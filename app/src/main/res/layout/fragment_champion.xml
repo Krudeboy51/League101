@@ -2,12 +2,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.kking.league.ChampionFragment">
+    tools:context="com.example.kking.league.champion.Views.ChampionFragment">
+
+    <android.support.v7.widget.Toolbar
+        android:id = "@+id/toolbar"
+        android:layout_width = "match_parent"
+        android:layout_height = "65dp"
+        android:background = "@color/colorPrimary"
+        android:elevation="5dp"
+        android:title=""
+        android:theme = "@style/ThemeOverlay.AppCompat.ActionBar"
+        android:padding="0dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="5">
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"/>
+            <Spinner
+                android:id="@+id/champ_type_spnr"
+                android:layout_width="65dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <GridView
+        android:layout_marginTop="65dp"
+        android:id="@+id/champion_gridview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Champion" />
+        android:columnWidth="100dp"
+        android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10dp" />
 
 </FrameLayout>

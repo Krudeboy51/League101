@@ -6,6 +6,29 @@
     <string name="title_notifications">Notifications</string>
     <string name="champions">Champions</string>
 
+
+    <string-array name="region">
+        <item>na1</item>
+        <item>ru</item>
+        <item>pbe1</item>
+        <item>kr</item>
+        <item>br1</item>
+        <item>oc1</item>
+        <item>jp1</item>
+        <item>eun1</item>
+        <item>euw1</item>
+        <item>tr1</item>
+        <item>la1</item>
+        <item>la2</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="all_">All</string>
+    <string name="tank">Tank</string>
+    <string name="support">Support</string>
+    <string name="marksman">Marksman</string>
+    <string name="mage">Mage</string>
+    <string name="fighter">Fighter</string>
+    <string name="assasin">Assasin</string>
 </resources>

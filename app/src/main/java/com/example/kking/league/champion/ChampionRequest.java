@@ -22,6 +22,8 @@ public class ChampionRequest<T> extends Request<T> {
     private Class<T> clazz;
     private Response.Listener<T> listener;
 
+
+
     public ChampionRequest(String url, Response.ErrorListener listener, Class<T> clazz, Response.Listener<T> l) {
         super(Method.GET, url, listener);
         this.clazz = clazz;
